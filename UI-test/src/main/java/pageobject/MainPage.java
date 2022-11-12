@@ -1,4 +1,4 @@
-package pageObject;
+package pageobject;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
@@ -6,7 +6,6 @@ import io.qameta.allure.Step;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 
-import static com.codeborne.selenide.Selenide.open;
 import static com.codeborne.selenide.Selenide.page;
 
 
@@ -40,6 +39,15 @@ public class MainPage {
     @FindBy(how = How.XPATH, using = "//*[text()='Начинки']")
     private SelenideElement buttonFillings;
 
+    @FindBy(how = How.XPATH, using = "//h2[text()='Начинки']")
+    private SelenideElement buttonFillingsHeader;
+
+    @FindBy(how = How.XPATH, using = "//h2[text()='Соусы']")
+    private SelenideElement buttonSauceHeader;
+
+    @FindBy(how = How.XPATH, using = "//h2[text()='Булки']")
+    private SelenideElement buttonBunsHeader;
+
     //наименования класса  после выбора раздела
     @FindBy(how = How.CLASS_NAME, using = "tab_tab_type_current__2BEPc")
     private SelenideElement sectionIngredients;
@@ -52,18 +60,6 @@ public class MainPage {
     public LoginPage clickLoginButton() {
         loginButton.click();
         return page(LoginPage.class);
-    }
-
-    @Step("Зарегистрировать нового пользователя")
-    public void createUser(User user) {
-
-        open(MainPage.URL_MAIN, MainPage.class)
-                .clickLoginButton()
-                .clickRegistrationButton()
-                .setName(user.getName())
-                .setEmail(user.getEmail())
-                .setPassword(user.getPassword())
-                .clickButtonRegistration();
     }
 
     @Step("Проверить кнопку Оформить заказ")
@@ -82,22 +78,6 @@ public class MainPage {
     public ProfilePage clickProfileButtonAfterAuth() {
         personalProfileButton.click();
         return page(ProfilePage.class);
-    }
-
-    @Step("Создать рандомного пользователя и войти")
-    public MainPage createUserAndLogin(User user) {
-
-        return open(MainPage.URL_MAIN, MainPage.class)
-                .clickLoginButton()
-                .clickRegistrationButton()
-                .setName(user.getName())
-                .setEmail(user.getEmail())
-                .setPassword(user.getPassword())
-                .clickConfirmRegistrationButton()
-                .enterHeaderShouldBeVisible()
-                .setEmail(user.getEmail())
-                .setPassword(user.getPassword())
-                .clickLoginPageAuthButton();
     }
 
     @Step("Проверить заголовок Конструктор")
@@ -125,37 +105,37 @@ public class MainPage {
 
     @Step("Проверить что заголовок Булки появился")
     public boolean isBunsHeaderIsDisplayed() {
-        return buttonBuns.isDisplayed();
+        return sectionIngredients.getText().contentEquals("Булки");
     }
 
     @Step("Проверить что заголовок Соусы появился")
     public boolean isSaucesHeaderDisplayed() {
-        return buttonSauce.isDisplayed();
+        return sectionIngredients.getText().contentEquals("Соусы");
     }
 
     @Step("Проверить что заголовок Начинки появился")
     public boolean isFillingsHeaderDisplayed() {
-        return buttonFillings.isDisplayed();
+        return sectionIngredients.getText().contentEquals("Начинки");
     }
 
     @Step("Скролл до Булочек")
     public MainPage scrollToBunsHeader() {
         constructorContainer.click();
-        buttonBuns.scrollTo();
+        buttonBunsHeader.scrollIntoView(false);
         return this;
     }
 
     @Step("Скролл до Соусов")
     public MainPage scrollToSaucesHeader() {
         constructorContainer.click();
-        buttonSauce.scrollTo();
+        buttonSauceHeader.scrollIntoView(false);
         return this;
     }
 
     @Step("Скролл до Начинок")
-    public MainPage scrollToIngredientsHeader() {
+    public MainPage scrollToFillingsHeader() {
         constructorContainer.click();
-        buttonFillings.scrollTo();
+        buttonFillingsHeader.scrollIntoView(false);
         return this;
     }
 

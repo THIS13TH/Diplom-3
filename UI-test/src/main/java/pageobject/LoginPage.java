@@ -1,5 +1,6 @@
-package pageObject;
+package pageobject;
 
+import api.User;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
@@ -7,7 +8,6 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 
 import static com.codeborne.selenide.Selenide.page;
-import static com.codeborne.selenide.WebDriverRunner.url;
 
 public class LoginPage {
 
@@ -36,8 +36,11 @@ public class LoginPage {
         authorizationButton.shouldBe(Condition.visible);
     }
 
+    @FindBy(how = How.XPATH, using = "//p[text()='Некорректный пароль']")
+    private SelenideElement errorPasswordMessage;
+
     @Step("Нажать кнопку Зарегистрироваться")
-    public RegistrationPage clickRegistrationButton() {
+    public RegistrationPage clickRegistrationButtonLoginPage() {
         registrationButton.click();
         return page(RegistrationPage.class);
     }
@@ -80,5 +83,10 @@ public class LoginPage {
     public boolean isEnterButtonExist() {
         enterButton.shouldBe(Condition.visible);
         return enterButton.exists();
+    }
+
+    @Step("Проверить сообщение об ошибке")
+    public boolean isErrorMessageAppear() {
+        return errorPasswordMessage.exists();
     }
 }

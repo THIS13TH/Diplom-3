@@ -1,9 +1,8 @@
 import io.qameta.allure.junit4.DisplayName;
 import org.junit.Test;
-import pageObject.MainPage;
+import pageobject.MainPage;
 
 import static com.codeborne.selenide.Selenide.open;
-import static org.junit.Assert.assertEquals;
 
 public class MoveToConstructorSectionsTest extends BaseTest {
 
@@ -19,8 +18,7 @@ public class MoveToConstructorSectionsTest extends BaseTest {
     @Test
     @DisplayName("Перейти в Соусы в конструкторе по кнопке")
     public void moveSaucesSectionButtonTest() {
-
-       open(MainPage.URL_MAIN, MainPage.class)
+        open(MainPage.URL_MAIN, MainPage.class)
                 .clickSaucesButton()
                 .isSaucesHeaderDisplayed();
     }
@@ -37,8 +35,7 @@ public class MoveToConstructorSectionsTest extends BaseTest {
     @Test
     @DisplayName("Скролл к Булочкам в конструторе")
     public void moveBunsSectionScrollTest() {
-       open(MainPage.URL_MAIN, MainPage.class)
-                .scrollToIngredientsHeader()
+        open(MainPage.URL_MAIN, MainPage.class)
                 .scrollToBunsHeader()
                 .isBunsHeaderIsDisplayed();
     }
@@ -57,7 +54,7 @@ public class MoveToConstructorSectionsTest extends BaseTest {
     @DisplayName("Скролл к Начинкам в конструторе")
     public void moveFillingsSectionScrollest() {
         open(MainPage.URL_MAIN, MainPage.class)
-                .scrollToIngredientsHeader()
+                .scrollToFillingsHeader()
                 .isFillingsHeaderDisplayed();
     }
 

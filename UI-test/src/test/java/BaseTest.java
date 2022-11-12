@@ -1,16 +1,19 @@
+import api.Generator;
+import api.User;
+import api.UserClient;
+import api.UserCredentials;
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
 import io.github.bonigarcia.wdm.WebDriverManager;
+import io.restassured.response.Response;
 import org.junit.After;
 import org.junit.Before;
-import pageObject.Generator;
-import pageObject.MainPage;
-import pageObject.User;
 
 abstract public class BaseTest {
-    protected final User user = Generator.getRandomUser();
 
-    protected static MainPage mainPage;
+    protected static final User user = Generator.getRandomUser();
+
+    UserClient userClient;
 
     public void setUp() {
         WebDriverManager.chromedriver().setup();
@@ -25,13 +28,19 @@ abstract public class BaseTest {
     public void init() {
         setUp();
 
-        mainPage = new MainPage();
-        mainPage.createUser(user);
+        userClient = new UserClient();
+        userClient.createUser(user);
     }
 
     @After
     public void tearDown() {
         Selenide.clearBrowserCookies();
         Selenide.clearBrowserLocalStorage();
+
+        UserCredentials userCredentials = new UserCredentials(user.getEmail(), user.getPassword());
+        Response response = userClient.login(userCredentials);
+        if (response.body().jsonPath().getString("accessToken") != null) {
+            userClient.delete(response);
+        }
     }
 }

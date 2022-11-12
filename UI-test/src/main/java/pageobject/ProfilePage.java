@@ -1,4 +1,4 @@
-package pageObject;
+package pageobject;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
@@ -6,9 +6,7 @@ import io.qameta.allure.Step;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 
-import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.page;
-import static com.codeborne.selenide.WebDriverRunner.url;
 
 public class ProfilePage {
     public final static String URL_PROFILE = "https://stellarburgers.nomoreparties.site/account/profile";

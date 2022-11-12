@@ -1,4 +1,4 @@
-package pageObject;
+package pageobject;
 
 import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
@@ -19,9 +19,6 @@ public class RegistrationPage {
 
     @FindBy(how = How.XPATH, using = "//*[text()='Пароль']/following-sibling::input")
     private SelenideElement passwordField;
-
-    @FindBy(how = How.XPATH, using = "//p[text()='Некорректный пароль']")
-    private SelenideElement errorPasswordMessage;
 
     @FindBy(how = How.XPATH, using = "//button[text()='Зарегистрироваться']")
     private SelenideElement confirmRegistrationButton;
@@ -58,11 +55,6 @@ public class RegistrationPage {
     public LoginPage clickConfirmRegistrationButton() {
         confirmRegistrationButton.click();
         return page(LoginPage.class);
-    }
-
-    @Step("Проверить сообщение об ошибке")
-    public boolean isErrorMessageAppear() {
-        return errorPasswordMessage.exists();
     }
 
 

@@ -1,4 +1,4 @@
-package pageObject;
+package api;
 
 import net.datafaker.Faker;
 
@@ -11,6 +11,6 @@ public class Generator {
         String email = faker.internet().emailAddress();
         String password = faker.password().toString();
 
-        return new User(name, email, password);
+        return new User(email, password, name );
     }
 }

@@ -1,6 +1,6 @@
 import io.qameta.allure.junit4.DisplayName;
 import org.junit.Test;
-import pageObject.LoginPage;
+import pageobject.LoginPage;
 
 import static com.codeborne.selenide.Selenide.open;
 

@@ -1,8 +1,8 @@
 import io.qameta.allure.junit4.DisplayName;
 import org.junit.Test;
-import pageObject.MainPage;
-import pageObject.RecoveryPasswordPage;
-import pageObject.RegistrationPage;
+import pageobject.MainPage;
+import pageobject.RecoveryPasswordPage;
+import pageobject.RegistrationPage;
 
 import static com.codeborne.selenide.Selenide.open;
 
