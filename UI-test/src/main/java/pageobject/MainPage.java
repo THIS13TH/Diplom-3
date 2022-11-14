@@ -55,6 +55,9 @@ public class MainPage {
     @FindBy(how = How.XPATH, using = "//div[@class='BurgerIngredients_ingredients__menuContainer__Xu3Mo']")
     private SelenideElement constructorContainer;
 
+    @FindBy(how = How.XPATH, using = "//p[text()='Некорректный пароль']")
+    private SelenideElement errorPasswordMessage;
+
 
     @Step("Кликнуть Войти в аккаунт")
     public LoginPage clickLoginButton() {
@@ -143,5 +146,10 @@ public class MainPage {
     public MainPage constructionShouldBeVisible() {
         constructorContainer.shouldBe(Condition.visible);
         return this;
+    }
+
+    @Step("Проверить сообщение об ошибке")
+    public boolean isErrorMessageAppear() {
+        return errorPasswordMessage.exists();
     }
 }

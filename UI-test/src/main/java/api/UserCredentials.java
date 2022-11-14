@@ -13,6 +13,10 @@ public class UserCredentials {
         return new UserCredentials(user.getEmail(), user.getPassword());
     }
 
+    public static UserCredentials from(String email, String password) {
+        return new UserCredentials(email, password);
+    }
+
     @Override
     public String toString() {
         return "UserCredentials{" +
